@@ -2,6 +2,7 @@ import domain.HardcodedPoetryLibrary;
 import domain.ObtainPoems;
 import domain.PoetryReader;
 import domain.RequestVerses;
+import infra.PoetryLibraryResourceFileAdapter;
 import infra.WriteLines;
 import infra.ConsoleAdapter;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class AcceptanceTests {
 
     @Test
     public void should_provide_verses_when_asked_for_poetry_with_the_support_of_a_console() {
-       // 1. Instantiate the right-side adapter(s) ("I want to go outside the hexagon")
+        // 1. Instantiate the right-side adapter(s) ("I want to go outside the hexagon")
         ObtainPoems poetryLibrary = mock(ObtainPoems.class);
         String alistairPoem = "If you could read a leaf or tree\nyou'd have no need of books.\n-- Alistair Cockburn (1987)";
         when(poetryLibrary.getMeAPoem()).thenReturn(alistairPoem);
@@ -52,6 +53,22 @@ public class AcceptanceTests {
 
         // Check that System.out.println has been called
         verify(publicationStrategy).writeLine(alistairPoem);
+    }
+
+    @Test
+    public void should_provide_verses_when_asked_for_poetry_with_the_support_of_a_file_adapter() {
+        // 1. Instantiate the right-side adapter
+        PoetryLibraryResourceFileAdapter fileAdapter = new PoetryLibraryResourceFileAdapter("rimbaud.txt");
+
+        // 2. Instantiate the hexagon
+        PoetryReader poetryReader = new PoetryReader(fileAdapter);
+
+        String verses = poetryReader.giveMeSomePoetry();
+
+        assertThat(verses, is("Comme je descendais des Fleuves impassibles,\n" +
+                "Je ne me sentis plus guidé par les haleurs :\n" +
+                "Des Peaux-Rouges criards les avaient pris pour cibles\n" +
+                "Les ayant cloués nus aux poteaux de couleurs."));
     }
 }
 
