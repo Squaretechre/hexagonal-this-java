@@ -1,7 +1,6 @@
 package infra;
 
 import domain.RequestVerses;
-import domain.WriteLines;
 
 public class ConsoleAdapter {
     private RequestVerses poetryReader;
@@ -13,12 +12,12 @@ public class ConsoleAdapter {
     }
 
     public void ask() {
-        // Adapt from infrastructure to domain logic
+        // 1. Adapt from infrastructure to domain logic
 
-        // Business logic
+        // 2. Business logic
         String verses = poetryReader.giveMeSomePoetry();
 
-        // Adapt from domain to infrastructure
+        // 3. Adapt from domain to infrastructure
         publicationStrategy.writeLine(verses);
     }
 }

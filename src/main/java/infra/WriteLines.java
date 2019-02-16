@@ -1,4 +1,4 @@
-package domain;
+package infra;
 
 public interface WriteLines {
     void writeLine(String alistairPoem);

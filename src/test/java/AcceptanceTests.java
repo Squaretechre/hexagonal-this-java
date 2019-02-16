@@ -1,7 +1,7 @@
 import domain.ObtainPoems;
 import domain.PoetryReader;
 import domain.RequestVerses;
-import domain.WriteLines;
+import infra.WriteLines;
 import infra.ConsoleAdapter;
 import org.junit.Test;
 
