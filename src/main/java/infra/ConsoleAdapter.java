@@ -1,10 +1,15 @@
 package infra;
 
+import domain.PoetryReader;
 import domain.RequestVerses;
 
 public class ConsoleAdapter {
     private RequestVerses poetryReader;
     private WriteLines publicationStrategy;
+
+    public ConsoleAdapter(PoetryReader poetryReader) {
+        this(poetryReader, new ConsolePublicationStrategy());
+    }
 
     public ConsoleAdapter(RequestVerses poetryReader, WriteLines publicationStrategy) {
         this.poetryReader = poetryReader;
@@ -20,4 +25,6 @@ public class ConsoleAdapter {
         // 3. Adapt from domain to infrastructure
         publicationStrategy.writeLine(verses);
     }
+
 }
+
